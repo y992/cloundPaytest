@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cloud123pay</title>
+    <link rel="stylesheet" href="./css/Reset.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.js"></script>
+
+</head>
+<script>
+    $(document).ready(function(){
+//  货币选择
+        $("#btn-choose").click(function(){
+            $(".type_ofCurrency").show();
+            $("#mask").css("height",$(document).height());
+            $("#mask").css("width",$(document).width());
+            $("#mask").show();
+        });
+        $("#close").click(function () {
+            $(".type_ofCurrency").hide();
+            $("#mask").hide();
+
+        });
+
+        var currencyArray = $("#currency_list li");
+        $("#currency_list li").click(function () {
+            var count = $(this).index();
+            var currency = currencyArray.eq(count).text();
+            $("#choose_value").text(currency)
+
+            $(".type_ofCurrency").hide();
+            $("#mask").hide();
+        })
+
+        //    选择银行
+        var isExpend = false;
+        $("#choose_btn").click(function(){
+            isExpend = !isExpend;
+            $(".imgList").toggle();
+            if (isExpend) {
+                $("#choose_btn").css("background-image", "url('./img/up.png')");
+            } else {
+                $("#choose_btn").css("background-image", "url('./img/down.png')");
+            }
+        });
+
+
+//        选中状态
+        $(".bankContent img").bind("click",function(){
+//            $(this).css("border","1px solid red").siblings();
+            $('.bankContent img').removeClass("on");
+            if($(this).hasClass("on")){
+                $(this).removeClass("on");
+            }else{
+                $(this).addClass("on");
+            }
+
+        })
+
+// 表单验证
+        $("#registerForm").bootstrapValidator({
+            message: "",
+            feedbackIcons: {
+
+            },
+            fields: {
+                email: {
+                    validators: {
+                        notEmpty: {
+                            message: '* 邮箱不能为空'
+                        },
+                        emailAddress: {
+                            message: '* 邮箱格式不正确'
+                        }
+                    }
+                },
+                Username: {
+                    message: '* 用户名还没有验证',
+                    validators: {
+                        notEmpty: {
+                            message: '* 客户号不能为空'
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 16,
+                            message: '* 客户号长度在1到16位之间'
+                        },
+                    }
+                },
+                count: {
+                    message: '* 客户姓名还没有验证',
+                    validators: {
+                        notEmpty: {
+                            message: '* 客户姓名不能为空'
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 16,
+                            message: '* 客户姓名长度在1到16位之间'
+                        },
+
+                    }
+                },
+                sum: {
+                    validators: {
+                        notEmpty: {
+                            message: '* 金额不能为空'
+                        },
+                        regexp:{
+                            regexp: /^[0-9]*$/,
+                            message: '* 请输入正确的数字金额',
+                        }
+
+                    }
+                },
+            }
+        });
+
+
+    });
+</script>
+<body>
+<!--top-->
+<div id="overall-header" class="container clearfix">
+    <div id="header-logo" class="header-logo-gb"><a href="/"><span>福汇官网</span></a></div>
+
+    <!--<div id="header-nav" >-->
+        <!--<ul class="clearfix">-->
+            <!--<li class="emphasize-action omni-demo"><a class="btn-practice-account" href="/gb/forex-trading-demo/">模拟账户</a></li>-->
+            <!--<li class="emphasize-action omni-live"><a class="btn-open-account" href="/gb/open-account/">开立真实账户</a></li>-->
+            <!--<li><a class="btn-deposit" href="/gb/accounts/deposit-funds/">存入资金</a></li>-->
+            <!--<li><a class="btn-myfxcm" href="https://www.myfxcm.com/fxma/login?locale=zh_CN_FXCM" target="_blank" rel="nofollow">MyFXCM</a></li>-->
+            <!--<li class="omni-login">  &lt;!&ndash;has-tooltip&ndash;&gt;-->
+                <!--<a class="btn-login has-ico" href="https://tsweb.fxcorporate.com/?lc=zh_CN" target="_blank" rel="nofollow">登入网络平台</a>-->
+
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a class="btn-online-chat has-ico" onclick="popupchat()" rel="nofollow">线上咨询<i class="ico ico-complex ico-chat"></i></a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="/tc/accounts/deposit-funds/"  class="btn-lang" rel="nofollow"><span>繁體</span></a>-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</div>-->
+
+
+</div>
+<!--head-nav-->
+<div id="overall-navigation">
+    <div id="navigation" class="container">
+        <ul class="header-nav-ul clearfix">
+            <li class="curr"><a href="https://www.fxcm-chinese.com/" title="福汇官网">首页</a></li>
+            <li><a href="https://www.fxcm-chinese.com/gb/advantages/leading-forex-broker/">优势</a></li>
+            <li><a href="https://www.fxcm-chinese.com/gb/forex-basics/what-is-forex/">外汇基础知识</a></li>
+            <li><a href="https://www.fxcm-chinese.com/gb/products/overview/">产品</a></li>
+            <li><a href="https://www.fxcm-chinese.com/gb/services/overview/">服务</a></li>
+            <li><a href="https://www.fxcm-chinese.com/gb/center/shanghai/">福汇讲座中心</a></li>
+            <li><a href="https://www.fxcm-chinese.com/gb/resources/overview/">资源中心</a></li>
+            <li><a href="https://www.fxcm-chinese.com/gb/support/">支援</a></li>
+            <li><a href="https://www.fxcm-chinese.com/gb/premium/">尊贵客户专区</a></li>
+        </ul>
+    </div>
+</div>
+<!--main body-->
+<section id="mainContent">
+    <div id="mask"></div>
+    <div id="mainContentForm">
+        <form id="registerForm" class="form-horizontal" role="form">
+            <div id="mainContent-top">
+                <h3 ><b class="Vertical-line"></b>请填写订单资料</h3>
+            </div>
+            <div class="form-group "style="margin-left: 10px">
+                <!--<label class="col-sm-2 control-label"  for="formGroupInputName">客户姓名</label>-->
+                <h3>客户姓名</h3>
+                <div class="col-sm-11">
+                    <span class="icon-bg form-control-feedback"><img src="./img/icon-name.png" alt=""></span>
+                    <input class="form-control" type="text" name="Username" id="formGroupInputName" placeholder="姓名">
+                </div>
+            </div>
+            <div class="form-group form-group-sm"style="margin-left: 10px">
+                <!--<label class="col-sm-2 control-label" for="formGroupInputNumber">客户号</label>-->
+                <h3>客户号</h3>
+                <div class="col-sm-11">
+                    <span class="icon-bg form-control-feedback"><img src="./img/icon-n.png" alt=""></span>
+                    <input class="form-control" type="text" name="count" id="formGroupInputNumber" placeholder="账号">
+                </div>
+            </div>
+            <div class="form-group form-group-sm"style="margin-left: 10px">
+                <!--<label class="col-sm-2 control-label" for="formGroupInputEmail">注册邮箱</label>-->
+                <h3>注册邮箱地址</h3>
+                <div class="col-sm-11">
+                    <span class="icon-bg form-control-feedback"><img src="./img/icon-email.png" alt=""></span>
+                    <input class="form-control" type="email" name="email" id="formGroupInputEmail" placeholder="邮箱">
+                </div>
+            </div>
+            <div class="form-group form-group-sm" style="margin-left: 10px">
+                <!--<label class="col-sm-2 control-label" for="formGroupInputMoney">交易金额</label>-->
+                <h3>交易金额</h3>
+                <div class="col-sm-2">
+                    <button type="button" id="btn-choose"><a id="choose_value">RMB</a><img src="./img/icon-d2.png" alt=""></button>
+                </div>
+                <div class="col-sm-11" style="margin-left: -15px;width: 76%">
+                    <span class="icon-bg form-control-feedback"><img src="./img/icon-m.png" alt=""></span>
+                    <input class="form-control" type="text" name="sum" id="formGroupInputMoney" placeholder="交易金额"style="">
+                </div>
+            </div>
+            <div class="form-group form-group-sm"style="margin-left: 10px">
+                <!--<label class="col-sm-2 control-label">附言</label>-->
+                <h3>附言</h3>
+
+                <div class="col-sm-11">
+                    <textarea class="form-control" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="type_ofCurrency">
+                <h3>货币类型 <img src="./img/icon-2.png" alt="" id="close"></h3>
+                <ul id="currency_list">
+                    <li >RMB</li>
+                    <li >MOP</li>
+                    <li >HKD</li>
+                    <li >USD</li>
+                    <li >EUR</li>
+                    <li >JPY</li>
+                </ul>
+                <img src="./img/down.png" alt="" class="icon_btn">
+            </div>
+            <div id="Choose_bank">
+                <div class="Choose_title">
+
+                    <h3><b class="Vertical-line"></b>请选择银行</h3>
+                </div>
+                <div class="bankContent">
+                    <ul id="imgList">
+                        <li><img src="./img/bank.png" /></li>
+                        <li><img src="./img/1.png" /></li>
+                        <li><img src="./img/2.png" /></li>
+                        <li><img src="./img/3.png" /></li>
+                        <li><img src="./img/4.png" /></li>
+                        <li><img src="./img/5.png" /></li>
+                    </ul>
+                    <ul class="imgList" style="display:none;margin-top: -10px">
+                        <li><img src="./img/6.png" /></li>
+                        <li><img src="./img/7.png" /></li>
+                        <li><img src="./img/8.png" /></li>
+                        <li><img src="./img/9.png" /></li>
+                        <li><img src="./img/10.png" /></li>
+                    </ul>
+
+                    <div id="choose_btn"></div>
+
+                </div>
+
+                <div id="btn-bank">
+                    <input type="button" id="cancel"value="取消" style=" background-color: #3493a8;color: #ffffff"/>
+                    <input type="submit" id="define" value="确定" style="background-color: #5abe71;color: #ffffff"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+</body>
+</html>
